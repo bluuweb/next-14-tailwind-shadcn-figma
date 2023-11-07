@@ -1,4 +1,6 @@
+import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
@@ -17,10 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className="container mx-auto ">
+      <body className={cn(inter.className, "")}>
+        <div className="container mx-auto sm:h-screen sm:flex sm:flex-col sm:justify-between">
           <Navbar />
           {children}
+          <Footer />
         </div>
       </body>
     </html>
