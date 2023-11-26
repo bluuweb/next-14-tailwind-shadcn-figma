@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import MakeBurger from "./components/burger";
 import { MakeCart } from "./components/cart";
@@ -8,10 +7,11 @@ import MakeTitle from "./components/title";
 import { Ingredient } from "./interfaces/ingredient.type";
 
 import { ingredients as initialState } from "./db/ingredientsDB";
+import { BurgerItem } from "./interfaces/burgerItem.type";
 
 const MakePage = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>(initialState);
-  const [burger, setBurger] = useState<Ingredient[]>([]);
+  const [customBurger, setCustomBurger] = useState<BurgerItem[]>([]);
 
   const addIngredient = (id: string) => {
     setIngredients((prev) =>
@@ -25,8 +25,8 @@ const MakePage = () => {
         return item;
       })
     );
+    addToBurger(id);
 
-    addBurger(id);
   };
 
   const removeIngredient = (id: string) => {
@@ -44,27 +44,50 @@ const MakePage = () => {
     removeBurger(id);
   };
 
-  const addBurger = (id: string) => {
-    setBurger((prev) => {
-      const item = ingredients.find((ingredient) => ingredient.id === id);
+  const addToBurger = (id: string) => {
+    setCustomBurger((prev) => {
+      const item = ingredients.find((ingredient) => ingredient.id === id)
       if (item) {
-        return [...prev, item];
+        return [...prev, {
+          uniqueId: Date.now(),
+          id: item.id,
+          image: item.image,
+          alt: item.alt,
+        }];
       }
       return prev;
     });
   };
 
   const removeBurger = (id: string) => {
-    setBurger((prev) => {
-      return prev.filter((item, index) => item.id !== id);
-    });
+    setCustomBurger((prev) => {
+      let finded = false
+      prev.sort((a, b) => {
+        return b.uniqueId - a.uniqueId;
+      })
+      prev.map((item, index) => {
+        if (finded) {
+          return true
+        }
+        if (item.id === id) {
+          finded = true
+          prev.splice(index, 1)
+        }
+      })
+      return prev.sort((a, b) => {
+        return a.uniqueId - b.uniqueId;
+      })
+
+    })
+
+
   };
 
   return (
     <>
       <div className="grid grid-cols-3 items-center">
         <MakeTitle />
-        <MakeBurger burger={ingredients} />
+        <MakeBurger burger={customBurger} />
         <MakeCart ingredients={ingredients} />
       </div>
       <MakeIngredients
