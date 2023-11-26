@@ -12,6 +12,13 @@ import { BurgerItem } from "./interfaces/burgerItem.type";
 const MakePage = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>(initialState);
   const [customBurger, setCustomBurger] = useState<BurgerItem[]>([]);
+  const randomPlacement: Record<string, string> = {
+    1: 'translate-x-5 -rotate-6',
+    2: 'translate-x-10 -rotate-12',
+    3: 'translate-x-16 -rotate-12',
+    4: 'translate-x-30 -rotate-12',
+    5: 'translate-x-48 -rotate-6',
+  }
 
   const addIngredient = (id: string) => {
     setIngredients((prev) =>
@@ -53,6 +60,8 @@ const MakePage = () => {
           id: item.id,
           image: item.image,
           alt: item.alt,
+          small: item.small,
+          placement: item.rotate ? randomPlacement[Math.floor(Math.random() * 5) + 1] : 'transform-none'
         }];
       }
       return prev;

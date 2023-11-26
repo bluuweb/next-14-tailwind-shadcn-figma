@@ -6,4 +6,5 @@ export interface Ingredient {
   quantity: number;
   price: number;
   rotate: boolean;
+  small:boolean;
 }

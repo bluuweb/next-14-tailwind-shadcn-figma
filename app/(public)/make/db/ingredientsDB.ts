@@ -9,6 +9,7 @@ export const ingredients: Ingredient[] = [
     quantity: 0,
     price: 7,
     rotate: false,
+    small:false,
   },
   {
     id: "2",
@@ -18,6 +19,7 @@ export const ingredients: Ingredient[] = [
     quantity: 0,
     price: 0.3,
     rotate: false,
+    small:false,
   },
   {
     id: "3",
@@ -26,7 +28,8 @@ export const ingredients: Ingredient[] = [
     alt: "Ingredient Onion",
     quantity: 0,
     price: 0.1,
-    rotate: false,
+    rotate: true,
+    small:true,
   },
   {
     id: "4",
@@ -36,6 +39,7 @@ export const ingredients: Ingredient[] = [
     quantity: 0,
     price: 0.5,
     rotate: true,
+    small:false,
   },
 
   {
@@ -46,6 +50,7 @@ export const ingredients: Ingredient[] = [
     quantity: 0,
     price: 0.3,
     rotate: true,
+    small:true,
   },
 
   {
@@ -56,6 +61,7 @@ export const ingredients: Ingredient[] = [
     quantity: 0,
     price: 1,
     rotate: false,
+    small:false,
   },
 
   {
@@ -66,6 +72,7 @@ export const ingredients: Ingredient[] = [
     quantity: 0,
     price: 0.1,
     rotate: false,
+    small:false,
   },
 
   {
@@ -76,5 +83,6 @@ export const ingredients: Ingredient[] = [
     quantity: 0,
     price: 0.5,
     rotate: false,
+    small:false,
   },
 ];
